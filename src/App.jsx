@@ -1,43 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { LineChart } from "@mui/x-charts/LineChart";
-
+import React from "react";
+import { LineChart} from "@mui/x-charts/LineChart"
+import data from "./assets/data.json"
 function App() {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetch('./assets/data.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(jsonData => setData(jsonData))
-      .catch(error => {
-        console.error('Error loading data:', error);
-        setError('Failed to load data. Please try again later.');
-      });
-  }, []);
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  if (data.length === 0) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div>
       <LineChart
-        xAxis={[{ data: data.map(item => item.value) }]}
+        xAxis={[{ data:[0.44, 116,202,378,466  ,554,642,730,818,906,995, 1097,1215,1333,1451,1569,1687] }]}
         series={[
           {
-            data: data.map(item => item.y),
+            data: [7, 7.5, 8, 8.5, 6.5, 3, 3,2, 3.5, 3, 5, 5.5,6, 6.5, 8.5, 5, 7],
           },
         ]}
-        height={300}
+        height={500}
         margin={{ left: 30, right: 30, top: 30, bottom: 30 }}
         grid={{ vertical: true, horizontal: true }}
       />
